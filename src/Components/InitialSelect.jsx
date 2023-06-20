@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import Huf from "./Huf";
 import DomesticCompany from "./DomesticCompany";
+import CooperativeSociety from "./CooperativeSociety";
 
 const InitialSelect = ({ condition }) => {
   if (condition === "HUF" || condition === "AOPs/BOI") {
@@ -27,6 +28,12 @@ const InitialSelect = ({ condition }) => {
     return (
       <>
         <DomesticCompany />
+      </>
+    );
+  } else if (condition === "Co-operative Society") {
+    return (
+      <>
+        <CooperativeSociety />
       </>
     );
   } else {
