@@ -17,8 +17,11 @@ const AdvanceTaxCalculator = () => {
   return (
     <>
       <Flex bg={"#FFFFFF"} mt={"1rem"}>
-        <Box border={"2px solid red"} w={"80%"}>
-          <Box w={"95%"} m={"auto"}>
+        <Box 
+        // border={"2px solid red"} 
+        w={"80%"}>
+          <Box border={"1px solid gray"} w={"95%"} m={"auto"}>
+          <Box w={"100%"} m={"auto"}>
             <Box
               textAlign={"center"}
               bg={"#F4F4F4"}
@@ -51,7 +54,7 @@ const AdvanceTaxCalculator = () => {
             </Flex>
           </Box>
 
-          <Flex bg={"#F4F4F4"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="taxPayer">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -81,6 +84,8 @@ const AdvanceTaxCalculator = () => {
           </Flex>
 
           <InitialSelect condition={select} />
+          </Box>
+          
 
           <Box w={"20rem"} m={"auto"} mt={"0.7rem"}>
             <Button
@@ -88,6 +93,10 @@ const AdvanceTaxCalculator = () => {
               bg={"#FE6C5F"}
               fontSize={"0.9rem"}
               borderRadius={"0rem"}
+              _hover={{
+                color: "#FFFFFF",
+                bg: "#FE6C5F",
+              }}
             >
               Calculate
             </Button>
@@ -96,6 +105,10 @@ const AdvanceTaxCalculator = () => {
               bg={"#A0A1A1"}
               ml={"1rem"}
               borderRadius={"0rem"}
+              _hover={{
+                color: "#FFFFFF",
+                bg: "#A0A1A1",
+              }}
             >
               Reset
             </Button>

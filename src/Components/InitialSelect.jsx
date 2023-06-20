@@ -40,7 +40,7 @@ const InitialSelect = ({ condition }) => {
     return (
       <>
         <Box border={"1px solid #E9E9E9"}>
-          <Flex bg={"#FFFFFF"} w={"95%"} m={"auto"} p={"0.7rem"} pb={"0.1rem"}>
+          <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"} pb={"0.1rem"}>
             <FormControl id="bac">
               <Flex>
                 <FormLabel fontSize={"1rem"} fontWeight={"normal"}>
@@ -67,7 +67,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#FFFFFF"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="taxPayer">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -84,7 +84,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#F4F4F4"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="incomeTax">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -101,7 +101,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#FFFFFF"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="surcharge">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -118,7 +118,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#F4F4F4"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="EducationCess">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -135,7 +135,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#FFFFFF"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="secondaryeducationcess">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -152,7 +152,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#F4F4F4"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="totalTaxLiability">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -169,7 +169,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#FFFFFF"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="relief">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -181,7 +181,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#F4F4F4"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="tcs">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -193,7 +193,7 @@ const InitialSelect = ({ condition }) => {
             </FormControl>
           </Flex>
 
-          <Flex bg={"#FFFFFF"} w={"95%"} m={"auto"} p={"0.7rem"}>
+          <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
             <FormControl id="assessedTax">
               <Flex justifyContent={"space-between"}>
                 <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
