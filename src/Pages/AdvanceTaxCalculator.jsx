@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Text,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Flex,
   Image,
   FormControl,
@@ -15,6 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import InitialSelect from "../Components/InitialSelect";
+import Accord from "../Components/Accord";
 
 const AdvanceTaxCalculator = () => {
   const [select, setSelect] = useState("");
@@ -127,35 +123,7 @@ const AdvanceTaxCalculator = () => {
           </Flex>
         </Box>
 
-        <Box border={"2px solid green"} w={"20%"}>
-          <Box w={"90%"} m={"auto"} border={"1px solid black"}>
-            {" "}
-            <Accordion defaultIndex={[0]} allowMultiple bg={"#F3F3F3"}>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box
-                      as="span"
-                      flex="1"
-                      textAlign="left"
-                      fontSize={"1.2rem"}
-                    >
-                      TAX INFORMATION AND SERVICES
-                    </Box>
-
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </Box>
-        </Box>
+        <Accord />
       </Flex>
     </>
   );
