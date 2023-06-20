@@ -5,6 +5,7 @@ import { BsFacebook, BsYoutube } from "react-icons/bs";
 import { FaInstagramSquare, FaHome } from "react-icons/fa";
 import { ImSearch } from "react-icons/im";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -35,15 +36,17 @@ const Navbar = () => {
       </Flex>
 
       <Flex justifyContent={"space-between"} p={"1rem 2rem"}>
-        <Flex>
-          <Image src={"logo.jpg"} w={"10rem"} />
-          <Box>
-            <Text fontSize={"2rem"} pt={"2rem"} fontWeight={"semibold"}>
-              Income Tax Department
-            </Text>
-            <Text>Government of India</Text>
-          </Box>
-        </Flex>
+        <Link to={"/"}>
+          <Flex>
+            <Image src={"logo.jpg"} w={"10rem"} />
+            <Box>
+              <Text fontSize={"2rem"} pt={"2rem"} fontWeight={"semibold"}>
+                Income Tax Department
+              </Text>
+              <Text>Government of India</Text>
+            </Box>
+          </Flex>
+        </Link>
         <Flex pt={"2.4rem"}>
           <Input placeholder={"Search..."} />
           <Box bg={"#E39B14"} h={"2.3rem"} p={"0.4rem"}>
@@ -149,23 +152,36 @@ const Navbar = () => {
       </Flex>
 
       <Flex
-        justifyContent={"flex-start"}
+        justifyContent={"space-around"}
         mt={"1rem"}
         bg={"#ECECEC"}
-        p={"0.7rem"}
+        p={"0.7rem 2rem"}
         cursor={"pointer"}
       >
-        <Text color={"#3B9AC6"} fontSize={"0.9rem"}>
-          Income Tax Department
-        </Text>
-        <Text m={"0 0.4rem"}>{">"}</Text>
-        <Text color={"#3B9AC6"} fontSize={"0.9rem"}>
-          Tax Tools
-        </Text>
-        <Text m={"0 0.4rem"}>{">"}</Text>
-        <Text color={"#3B9AC6"} fontSize={"0.9rem"}>
-          House rent allowance calculator
-        </Text>
+        <Flex>
+          <Text color={"#3B9AC6"} fontSize={"0.9rem"}>
+            Income Tax Department
+          </Text>
+          <Text m={"0 0.4rem"}>{">"}</Text>
+          <Text color={"#3B9AC6"} fontSize={"0.9rem"}>
+            Tax Tools
+          </Text>
+          <Text m={"0 0.4rem"}>{">"}</Text>
+          <Text color={"#3B9AC6"} fontSize={"0.9rem"}>
+            House rent allowance calculator
+          </Text>
+        </Flex>
+
+        <Link to={"/"}>
+          <Text color={"#3B9AC6"} fontWeight={"bold"} fontSize={"1.2rem"}>
+            House Rent Allowance Calculator
+          </Text>
+        </Link>
+        <Link to={"/advance"}>
+          <Text color={"#3B9AC6"} fontWeight={"bold"} fontSize={"1.2rem"}>
+            Advance Tax Calculator
+          </Text>
+        </Link>
       </Flex>
     </>
   );

@@ -16,7 +16,10 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 const Accord = () => {
   return (
     <>
-      <Box border={"2px solid green"} w={"20%"}>
+      <Box
+        // border={"2px solid green"}
+        w={"20%"}
+      >
         <Box w={"90%"} m={"auto"}>
           {" "}
           <Accordion allowToggle>
