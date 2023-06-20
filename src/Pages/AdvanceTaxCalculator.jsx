@@ -14,10 +14,10 @@ import {
   Select,
   Button,
 } from "@chakra-ui/react";
+import InitialSelect from "../Components/InitialSelect";
 
 const AdvanceTaxCalculator = () => {
   const [select, setSelect] = useState("");
-
   return (
     <>
       <Flex bg={"#FFFFFF"} mt={"1rem"}>
@@ -83,6 +83,8 @@ const AdvanceTaxCalculator = () => {
               </Flex>
             </FormControl>
           </Flex>
+
+          <InitialSelect condition={select} />
 
           <Box w={"20rem"} m={"auto"} mt={"0.7rem"}>
             <Button
