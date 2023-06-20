@@ -9,12 +9,24 @@ import {
   Select,
 } from "@chakra-ui/react";
 import Huf from "./Huf";
+import DomesticCompany from "./DomesticCompany";
 
 const InitialSelect = ({ condition }) => {
   if (condition === "HUF" || condition === "AOPs/BOI") {
     return (
       <>
         <Huf />
+      </>
+    );
+  } else if (
+    condition === "Domestic Company" ||
+    condition === "Foreign Company" ||
+    condition === "Firms" ||
+    condition === "LLP"
+  ) {
+    return (
+      <>
+        <DomesticCompany />
       </>
     );
   } else {
