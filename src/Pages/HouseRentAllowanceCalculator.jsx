@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Box,
   Text,
@@ -9,6 +9,7 @@ import {
   Button,
   Input,
   Checkbox,
+  useToast,
 } from "@chakra-ui/react";
 import Accord from "../Components/Accord";
 
@@ -28,6 +29,8 @@ const HouseRentAllowanceCalculator = () => {
   });
 
   const checkRef = useRef();
+
+  const toast = useToast();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -65,6 +68,24 @@ const HouseRentAllowanceCalculator = () => {
             Math.min(HRA, basicSal, actualRentPaid) + Comision,
         };
       });
+
+      if (HRA - Math.min(HRA, basicSal, actualRentPaid) - Comision < 0) {
+        setCal((prev) => {
+          return {
+            ...prev,
+            exemptedHouseRentAllowance: 0,
+          };
+        });
+      }
+
+      if (Math.min(HRA, basicSal, actualRentPaid) + Comision < 0) {
+        setCal((prev) => {
+          return {
+            ...prev,
+            taxableHouseRentAllowance: 0,
+          };
+        });
+      }
     } else {
       basicSal = 0.4 * formData.basicSalary;
       setCal((prev) => {
@@ -102,13 +123,26 @@ const HouseRentAllowanceCalculator = () => {
     console.log(formData);
   };
 
+  useEffect(() => {
+    if (cal.exemptedHouseRentAllowance || cal.taxableHouseRentAllowance) {
+      toast({
+        position: "top",
+        title: "Income Tax Department",
+        description: `Exempted House Rent Allowance : ${cal.exemptedHouseRentAllowance} & Tax Able House Rent Allowance : ${cal.taxableHouseRentAllowance}`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }, [cal.exemptedHouseRentAllowance, cal.taxableHouseRentAllowance]);
+
   return (
     <>
       <Flex bg={"#FFFFFF"} mt={"1rem"}>
-        <Box 
-        
-        // border={"2px solid red"}
-         w={"80%"}>
+        <Box
+          // border={"2px solid red"}
+          w={"80%"}
+        >
           <Box border={"1px solid gray"} w={"95%"} m={"auto"}>
             <Box w={"100%"} m={"auto"}>
               <Box

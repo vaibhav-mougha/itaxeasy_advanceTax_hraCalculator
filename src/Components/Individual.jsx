@@ -8,6 +8,7 @@ import {
   Input,
   Select,
   Tooltip,
+  Button,
 } from "@chakra-ui/react";
 import IfhpContainer from "./IFHP-Box/IfhpContainer";
 import CapitalGainsBox from "./Capital-Gains/CapitalGainsBox";
@@ -645,6 +646,33 @@ const Individual = () => {
           </FormControl>
         </Flex>
       </Box>
+
+      <Box w={"20rem"} m={"auto"} mt={"0.7rem"} mb={"1rem"}>
+            <Button
+              color={"#FFFFFF"}
+              bg={"#FE6C5F"}
+              fontSize={"0.9rem"}
+              borderRadius={"0rem"}
+              _hover={{
+                color: "#FFFFFF",
+                bg: "#FE6C5F",
+              }}
+            >
+              Calculate
+            </Button>
+            <Button
+              color={"#FFFFFF"}
+              bg={"#A0A1A1"}
+              ml={"1rem"}
+              borderRadius={"0rem"}
+              _hover={{
+                color: "#FFFFFF",
+                bg: "#A0A1A1",
+              }}
+            >
+              Reset
+            </Button>
+          </Box>
     </>
   );
 };
