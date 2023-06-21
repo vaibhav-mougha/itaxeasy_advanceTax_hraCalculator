@@ -16,6 +16,7 @@ import IncomeFromOtherSources from "./IncomeFromOtherSources/IncomeFromOtherSour
 import DeductionsBox from "./Deductions/DeductionsBox";
 import TotalBox from "./Deductions/TotalBox";
 import CheckDeduction from "./Deductions/CheckDeduction";
+import ILTBox from "./ILTBox/ILTBox"
 
 const Individual = () => {
   const ifhpUrf = useRef(null);
@@ -276,7 +277,7 @@ const Individual = () => {
         </Box>
         {/* /////////////// */}
 
-        <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
+        <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
           <FormControl id="incomeTax">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -366,7 +367,7 @@ const Individual = () => {
 
         {/* ////////////////////////// */}
 
-        <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
+        <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
           <FormControl id="surcharge">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
@@ -430,8 +431,32 @@ const Individual = () => {
 
         {/* //////////////////////////// */}
 
+        <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
+          <FormControl id="profitsAndGains">
+            <Flex justifyContent={"space-between"}>
+              <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
+              Profits and Gains of Business or Profession (enter profit only)
+              </FormLabel>
+
+              <Input name="profitsAndGains" bg={"#F4F4F4"} w={"16rem"} type="number" />
+            </Flex>
+          </FormControl>
+        </Flex>
+
         <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
-          <FormControl id="EducationCess">
+          <FormControl id="agriculturalIncome">
+            <Flex justifyContent={"space-between"}>
+              <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
+              Agricultural Income
+              </FormLabel>
+
+              <Input name="agriculturalIncome" bg={"#F4F4F4"} w={"16rem"} type="number" />
+            </Flex>
+          </FormControl>
+        </Flex>
+
+        <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
+          <FormControl id="deductions">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
                 Deductions
@@ -572,17 +597,100 @@ const Individual = () => {
         {/* ////////////////////// */}
 
         <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
-          <FormControl id="secondaryeducationcess">
+          <FormControl id="netTaxableIncome">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
-                Secondary and higher education cess
+              Net Taxable Income
+              </FormLabel>
+
+              <Input name="netTaxableIncome" bg={"#F4F4F4"} w={"16rem"} type="number" />
+            </Flex>
+          </FormControl>
+        </Flex>
+
+        {/* ///////////////////////////// */}
+        <ILTBox bg={"#F4F4F4"} text={"Income Liable to Tax at Normal Rate ---"}/>
+        <ILTBox bg={"#FFFFFF"} text={"Short Term Capital Gains (Covered u/s 111A) 15%"}/>
+        <ILTBox bg={"#F4F4F4"} text={"Long Term Capital Gains (Covered u/s 112A) 10%"}/>
+        <ILTBox bg={"#FFFFFF"} text={"Long Term Capital Gains (Charged to tax @ 20%) 20%"}/>
+        <ILTBox bg={"#F4F4F4"} text={"Long Term Capital Gains (Charged to tax @ 10%) 10%"}/>
+        <ILTBox bg={"#FFFFFF"} text={"Winnings from Lottery, Crossword Puzzles, etc) 30%"}/>
+        {/* ///////////////////////////// */}
+
+        <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
+          <FormControl id="incomeTax">
+            <Flex justifyContent={"space-between"}>
+              <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
+                Income Tax
               </FormLabel>
 
               <Input
-                name="secondaryeducationcess"
+                name="incomeTax"
+                // value={formData.incomeTax}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                disabled
+                fontWeight={"bold"}
+              />
+            </Flex>
+          </FormControl>
+        </Flex>
+
+        <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
+          <FormControl id="surcharge">
+            <Flex justifyContent={"space-between"}>
+              <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
+                Surcharge
+              </FormLabel>
+
+              <Input
+                name="surcharge"
+                // value={formData.surcharge}
+                bg={"#E0E0E0"}
+                w={"16rem"}
+                type="number"
+                disabled
+              />
+            </Flex>
+          </FormControl>
+        </Flex>
+
+        <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
+          <FormControl id="educationCess">
+            <Flex justifyContent={"space-between"}>
+              <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
+                Education Cess
+              </FormLabel>
+
+              <Input
+                name="educationCess"
+                // value={formData.educationCess}
+                bg={"#E0E0E0"}
+                w={"16rem"}
+                type="number"
+                disabled
+                fontWeight={"bold"}
+              />
+            </Flex>
+          </FormControl>
+        </Flex>
+
+        <Flex bg={"#FFFFFF"} w={"100%"} m={"auto"} p={"0.7rem"}>
+          <FormControl id="secondaryHigherEducationCess">
+            <Flex justifyContent={"space-between"}>
+              <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
+                Secondary Higher Education Cess
+              </FormLabel>
+
+              <Input
+                name="secondaryHigherEducationCess"
+                // value={formData.secondaryHigherEducationCess}
+                bg={"#E0E0E0"}
+                w={"16rem"}
+                type="number"
+                disabled
+                fontWeight={"bold"}
               />
             </Flex>
           </FormControl>
@@ -597,9 +705,12 @@ const Individual = () => {
 
               <Input
                 name="totalTaxLiability"
+                // value={formData.totalTaxLiability}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                disabled
+                fontWeight={"bold"}
               />
             </Flex>
           </FormControl>
@@ -612,19 +723,35 @@ const Individual = () => {
                 Relief
               </FormLabel>
 
-              <Input name="relief" bg={"#F4F4F4"} w={"16rem"} type="number" />
+              <Input
+                name="relief"
+                // value={cal.relief}
+                // onChange={handleChange}
+                bg={"#F4F4F4"}
+                w={"16rem"}
+                type="number"
+                fontWeight={"bold"}
+              />
             </Flex>
           </FormControl>
         </Flex>
 
         <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
-          <FormControl id="tcs">
+          <FormControl id="tds">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
                 TDS/TCS/MAT (AMT) Credit Utilized
               </FormLabel>
 
-              <Input name="tcs" bg={"#F4F4F4"} w={"16rem"} type="number" />
+              <Input
+                name="tds"
+                // value={cal.tds}
+                // onChange={handleChange}
+                bg={"#FFFFFF"}
+                w={"16rem"}
+                type="number"
+                fontWeight={"bold"}
+              />
             </Flex>
           </FormControl>
         </Flex>
@@ -638,9 +765,12 @@ const Individual = () => {
 
               <Input
                 name="assessedTax"
+                // value={formData.assessedTax}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                disabled
+                fontWeight={"bold"}
               />
             </Flex>
           </FormControl>
