@@ -9,6 +9,7 @@ import {
   Select,
   Tooltip,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import IfhpContainer from "./IFHP-Box/IfhpContainer";
 import CapitalGainsBox from "./Capital-Gains/CapitalGainsBox";
@@ -16,9 +17,29 @@ import IncomeFromOtherSources from "./IncomeFromOtherSources/IncomeFromOtherSour
 import DeductionsBox from "./Deductions/DeductionsBox";
 import TotalBox from "./Deductions/TotalBox";
 import CheckDeduction from "./Deductions/CheckDeduction";
-import ILTBox from "./ILTBox/ILTBox"
+import ILTBox from "./ILTBox/ILTBox";
 
 const Individual = () => {
+  const [cal, setCal] = useState({
+    incomeFromSalary: "",
+    netTaxableIncome: "",
+    profitsAndGains: "",
+    relief: "",
+    tds: "",
+    agriculturalIncome: "",
+  });
+
+  const [formData, setFormData] = useState({
+    incomeTax: "",
+    surcharge: "",
+    educationCess: "",
+    secondaryHigherEducationCess: "",
+    totalTaxLiability: "",
+    assessedTax: "",
+  });
+
+  const toast = useToast();
+
   const ifhpUrf = useRef(null);
   const [ifhp, setIfhp] = useState(false);
 
@@ -67,6 +88,380 @@ const Individual = () => {
       }
     }
   };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setCal((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  // console.log(cal)
+
+  const handleClick = (event) => {
+    const { name, value } = event.target;
+    setCal((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+
+    cal.netTaxableIncome = cal.incomeFromSalary + cal.profitsAndGains;
+
+    if (cal.netTaxableIncome <= 250000) {
+      cal.netTaxableIncome = 0;
+      formData.incomeTax = 0;
+      formData.surcharge = 0;
+      formData.educationCess = 0;
+      formData.secondaryHigherEducationCess = 0;
+      formData.totalTaxLiability = 0;
+      formData.assessedTax = 0;
+
+      setCal((prev) => {
+        return {
+          ...prev,
+          relief: 0,
+          tds: 0,
+        };
+      });
+      toast({
+        position: "top",
+        title: "Income Tax Department",
+        description:
+          "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else if (
+      250001 <= cal.netTaxableIncome &&
+      cal.netTaxableIncome <= 500000
+    ) {
+      formData.incomeTax = (cal.netTaxableIncome * 0.05 - 12500).toFixed(2);
+      formData.surcharge = 0;
+      formData.educationCess = 0;
+      formData.secondaryHigherEducationCess = (
+        cal.netTaxableIncome / 1000
+      ).toFixed(2);
+      formData.totalTaxLiability = (
+        +formData.secondaryHigherEducationCess + +formData.incomeTax
+      ).toFixed(2);
+      formData.assessedTax = formData.totalTaxLiability - cal.relief;
+      formData.assessedTax = formData.assessedTax - cal.tds;
+      (+formData.assessedTax).toFixed(2);
+
+      if (formData.assessedTax <= 10000) {
+        formData.incomeTax = 0;
+        formData.surcharge = 0;
+        formData.educationCess = 0;
+        formData.secondaryHigherEducationCess = 0;
+        formData.totalTaxLiability = 0;
+        formData.assessedTax = 0;
+        setCal((prev) => {
+          return {
+            ...prev,
+            relief: 0,
+            tds: 0,
+          };
+        });
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description:
+            "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description: `Assessed Tax : ${formData.assessedTax}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else if (
+      500001 <= cal.netTaxableIncome &&
+      cal.netTaxableIncome <= 750000
+    ) {
+      // console.log(cal.netTaxableIncome);
+      formData.incomeTax = (cal.netTaxableIncome * 0.1 - 12500).toFixed(2);
+      formData.surcharge = 0;
+      formData.educationCess = 0;
+      formData.secondaryHigherEducationCess = (
+        cal.netTaxableIncome * 0.004
+      ).toFixed(2);
+      formData.totalTaxLiability = (
+        +formData.secondaryHigherEducationCess + +formData.incomeTax
+      ).toFixed(2);
+      formData.assessedTax = formData.totalTaxLiability - cal.relief;
+      formData.assessedTax = formData.assessedTax - cal.tds;
+      (+formData.assessedTax).toFixed(2);
+
+      if (formData.assessedTax <= 10000) {
+        formData.incomeTax = 0;
+        formData.surcharge = 0;
+        formData.educationCess = 0;
+        formData.secondaryHigherEducationCess = 0;
+        formData.totalTaxLiability = 0;
+        formData.assessedTax = 0;
+        setCal((prev) => {
+          return {
+            ...prev,
+            relief: 0,
+            tds: 0,
+          };
+        });
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description:
+            "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description: `Assessed Tax : ${formData.assessedTax}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else if (
+      750001 <= cal.netTaxableIncome &&
+      cal.netTaxableIncome <= 1000000
+    ) {
+      // console.log(cal.netTaxableIncome);
+      formData.incomeTax = (cal.netTaxableIncome * 0.15 - 37500).toFixed(2);
+      formData.surcharge = 0;
+      formData.educationCess = 0;
+      formData.secondaryHigherEducationCess = (
+        cal.netTaxableIncome * 0.0045
+      ).toFixed(2);
+      formData.totalTaxLiability = (
+        +formData.secondaryHigherEducationCess + +formData.incomeTax
+      ).toFixed(2);
+      formData.assessedTax = formData.totalTaxLiability - cal.relief;
+      formData.assessedTax = formData.assessedTax - cal.tds;
+      (+formData.assessedTax).toFixed(2);
+
+      if (formData.assessedTax <= 10000) {
+        formData.incomeTax = 0;
+        formData.surcharge = 0;
+        formData.educationCess = 0;
+        formData.secondaryHigherEducationCess = 0;
+        formData.totalTaxLiability = 0;
+        formData.assessedTax = 0;
+        setCal((prev) => {
+          return {
+            ...prev,
+            relief: 0,
+            tds: 0,
+          };
+        });
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description:
+            "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description: `Assessed Tax : ${formData.assessedTax}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else if (
+      1000001 <= cal.netTaxableIncome &&
+      cal.netTaxableIncome <= 1250000
+    ) {
+      // console.log(cal.netTaxableIncome);
+      formData.incomeTax = (cal.netTaxableIncome * 0.2 - 62500).toFixed(2);
+      formData.surcharge = 0;
+      formData.educationCess = 0;
+      formData.secondaryHigherEducationCess = (
+        cal.netTaxableIncome * 0.006
+      ).toFixed(2);
+      formData.totalTaxLiability = (
+        +formData.secondaryHigherEducationCess + +formData.incomeTax
+      ).toFixed(2);
+      formData.assessedTax = formData.totalTaxLiability - cal.relief;
+      formData.assessedTax = formData.assessedTax - cal.tds;
+      (+formData.assessedTax).toFixed(2);
+
+      if (formData.assessedTax <= 10000) {
+        formData.incomeTax = 0;
+        formData.surcharge = 0;
+        formData.educationCess = 0;
+        formData.secondaryHigherEducationCess = 0;
+        formData.totalTaxLiability = 0;
+        formData.assessedTax = 0;
+        setCal((prev) => {
+          return {
+            ...prev,
+            relief: 0,
+            tds: 0,
+          };
+        });
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description:
+            "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description: `Assessed Tax : ${formData.assessedTax}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else if (
+      1250001 <= cal.netTaxableIncome &&
+      cal.netTaxableIncome <= 1500000
+    ) {
+      // console.log(cal.netTaxableIncome);
+      formData.incomeTax = (cal.netTaxableIncome * 0.25 - 112500).toFixed(2);
+      formData.surcharge = 0;
+      formData.educationCess = 0;
+      formData.secondaryHigherEducationCess = (
+        cal.netTaxableIncome * 0.007
+      ).toFixed(2);
+      formData.totalTaxLiability = (
+        +formData.secondaryHigherEducationCess + +formData.incomeTax
+      ).toFixed(2);
+      formData.assessedTax = formData.totalTaxLiability - cal.relief;
+      formData.assessedTax = formData.assessedTax - cal.tds;
+      (+formData.assessedTax).toFixed(2);
+
+      if (formData.assessedTax <= 10000) {
+        formData.incomeTax = 0;
+        formData.surcharge = 0;
+        formData.educationCess = 0;
+        formData.secondaryHigherEducationCess = 0;
+        formData.totalTaxLiability = 0;
+        formData.assessedTax = 0;
+        setCal((prev) => {
+          return {
+            ...prev,
+            relief: 0,
+            tds: 0,
+          };
+        });
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description:
+            "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description: `Assessed Tax : ${formData.assessedTax}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } else if (cal.netTaxableIncome > 1500000) {
+      // console.log(cal.netTaxableIncome);
+      formData.incomeTax = (cal.netTaxableIncome * 0.3 - 188000).toFixed(2);
+      formData.surcharge = 0;
+      formData.educationCess = 0;
+      formData.secondaryHigherEducationCess = (
+        cal.netTaxableIncome * 0.008
+      ).toFixed(2);
+      formData.totalTaxLiability = (
+        +formData.secondaryHigherEducationCess + +formData.incomeTax
+      ).toFixed(2);
+      formData.assessedTax = formData.totalTaxLiability - cal.relief;
+      formData.assessedTax = formData.assessedTax - cal.tds;
+      (+formData.assessedTax).toFixed(2);
+
+      if (formData.assessedTax <= 10000) {
+        formData.incomeTax = 0;
+        formData.surcharge = 0;
+        formData.educationCess = 0;
+        formData.secondaryHigherEducationCess = 0;
+        formData.totalTaxLiability = 0;
+        formData.assessedTax = 0;
+        setCal((prev) => {
+          return {
+            ...prev,
+            relief: 0,
+            tds: 0,
+          };
+        });
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description:
+            "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top",
+          title: "Income Tax Department",
+          description: `Assessed Tax : ${formData.assessedTax}`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    }
+  };
+
+  const handleReset = () => {
+    setCal({
+      incomeFromSalary: "",
+      netTaxableIncome: "",
+      profitsAndGains: "",
+      relief: "",
+      tds: "",
+      agriculturalIncome: "",
+    });
+
+    setFormData({
+      incomeTax: "",
+      surcharge: "",
+      educationCess: "",
+      secondaryHigherEducationCess: "",
+      totalTaxLiability: "",
+      assessedTax: "",
+    });
+  };
+
   return (
     <>
       <Box border={"1px solid #E9E9E9"}>
@@ -146,7 +541,7 @@ const Individual = () => {
         </Flex>
 
         <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
-          <FormControl id="incomefromSalary">
+          <FormControl id="incomeFromSalary">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
                 Income from Salary (Income from salary after standard deduction
@@ -154,10 +549,12 @@ const Individual = () => {
               </FormLabel>
 
               <Input
-                name="incomefromSalary"
+                name="incomeFromSalary"
+                value={cal.incomeFromSalary}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                onChange={handleChange}
               />
             </Flex>
           </FormControl>
@@ -215,14 +612,17 @@ const Individual = () => {
               </Box>
 
               <Input
-                name="netTaxableIncome"
+                name="incomeFromHouseProperty"
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                disabled
               />
             </Flex>
           </FormControl>
         </Flex>
+
+        {/* IFHP-Box */}
         {/* //////////////// */}
         <Box
           bg={"#B4B4B4"}
@@ -307,15 +707,17 @@ const Individual = () => {
               </Box>
 
               <Input
-                name="incomeTax"
+                name="capitalGains"
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                disabled
               />
             </Flex>
           </FormControl>
         </Flex>
 
+        {/* Capital Gains */}
         {/* /////////////////////////// */}
         <Box
           bg={"#B4B4B4"}
@@ -397,15 +799,17 @@ const Individual = () => {
               </Box>
 
               <Input
-                name="surcharge"
+                name="incomeFromOtherSources"
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                disabled
               />
             </Flex>
           </FormControl>
         </Flex>
 
+        {/* Income From Other Sources */}
         {/* //////////////////////////// */}
 
         <Box
@@ -435,10 +839,17 @@ const Individual = () => {
           <FormControl id="profitsAndGains">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
-              Profits and Gains of Business or Profession (enter profit only)
+                Profits and Gains of Business or Profession (enter profit only)
               </FormLabel>
 
-              <Input name="profitsAndGains" bg={"#F4F4F4"} w={"16rem"} type="number" />
+              <Input
+                name="profitsAndGains"
+                value={cal.profitsAndGains}
+                bg={"#F4F4F4"}
+                w={"16rem"}
+                type="number"
+                onChange={handleChange}
+              />
             </Flex>
           </FormControl>
         </Flex>
@@ -447,10 +858,17 @@ const Individual = () => {
           <FormControl id="agriculturalIncome">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
-              Agricultural Income
+                Agricultural Income
               </FormLabel>
 
-              <Input name="agriculturalIncome" bg={"#F4F4F4"} w={"16rem"} type="number" />
+              <Input
+                name="agriculturalIncome"
+                value={cal.agriculturalIncome}
+                bg={"#F4F4F4"}
+                w={"16rem"}
+                type="number"
+                onChange={handleChange}
+              />
             </Flex>
           </FormControl>
         </Flex>
@@ -485,15 +903,17 @@ const Individual = () => {
               </Box>
 
               <Input
-                name="EducationCess"
+                name="deductions"
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                disbaled
               />
             </Flex>
           </FormControl>
         </Flex>
 
+        {/* Deductions Box */}
         {/* ////////////////////// */}
 
         <Box
@@ -600,21 +1020,47 @@ const Individual = () => {
           <FormControl id="netTaxableIncome">
             <Flex justifyContent={"space-between"}>
               <FormLabel fontSize={"1.2rem"} fontWeight={"normal"}>
-              Net Taxable Income
+                Net Taxable Income
               </FormLabel>
 
-              <Input name="netTaxableIncome" bg={"#F4F4F4"} w={"16rem"} type="number" />
+              <Input
+                name="netTaxableIncome"
+                value={cal.netTaxableIncome}
+                bg={"#F4F4F4"}
+                w={"16rem"}
+                type="number"
+                disabled
+              />
             </Flex>
           </FormControl>
         </Flex>
 
+        {/* ILT BOX */}
         {/* ///////////////////////////// */}
-        <ILTBox bg={"#F4F4F4"} text={"Income Liable to Tax at Normal Rate ---"}/>
-        <ILTBox bg={"#FFFFFF"} text={"Short Term Capital Gains (Covered u/s 111A) 15%"}/>
-        <ILTBox bg={"#F4F4F4"} text={"Long Term Capital Gains (Covered u/s 112A) 10%"}/>
-        <ILTBox bg={"#FFFFFF"} text={"Long Term Capital Gains (Charged to tax @ 20%) 20%"}/>
-        <ILTBox bg={"#F4F4F4"} text={"Long Term Capital Gains (Charged to tax @ 10%) 10%"}/>
-        <ILTBox bg={"#FFFFFF"} text={"Winnings from Lottery, Crossword Puzzles, etc) 30%"}/>
+        <ILTBox
+          bg={"#F4F4F4"}
+          text={"Income Liable to Tax at Normal Rate ---"}
+        />
+        <ILTBox
+          bg={"#FFFFFF"}
+          text={"Short Term Capital Gains (Covered u/s 111A) 15%"}
+        />
+        <ILTBox
+          bg={"#F4F4F4"}
+          text={"Long Term Capital Gains (Covered u/s 112A) 10%"}
+        />
+        <ILTBox
+          bg={"#FFFFFF"}
+          text={"Long Term Capital Gains (Charged to tax @ 20%) 20%"}
+        />
+        <ILTBox
+          bg={"#F4F4F4"}
+          text={"Long Term Capital Gains (Charged to tax @ 10%) 10%"}
+        />
+        <ILTBox
+          bg={"#FFFFFF"}
+          text={"Winnings from Lottery, Crossword Puzzles, etc) 30%"}
+        />
         {/* ///////////////////////////// */}
 
         <Flex bg={"#F4F4F4"} w={"100%"} m={"auto"} p={"0.7rem"}>
@@ -626,7 +1072,7 @@ const Individual = () => {
 
               <Input
                 name="incomeTax"
-                // value={formData.incomeTax}
+                value={formData.incomeTax}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
@@ -646,7 +1092,7 @@ const Individual = () => {
 
               <Input
                 name="surcharge"
-                // value={formData.surcharge}
+                value={formData.surcharge}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
@@ -665,7 +1111,7 @@ const Individual = () => {
 
               <Input
                 name="educationCess"
-                // value={formData.educationCess}
+                value={formData.educationCess}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
@@ -685,7 +1131,7 @@ const Individual = () => {
 
               <Input
                 name="secondaryHigherEducationCess"
-                // value={formData.secondaryHigherEducationCess}
+                value={formData.secondaryHigherEducationCess}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
@@ -705,7 +1151,7 @@ const Individual = () => {
 
               <Input
                 name="totalTaxLiability"
-                // value={formData.totalTaxLiability}
+                value={formData.totalTaxLiability}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
@@ -725,8 +1171,8 @@ const Individual = () => {
 
               <Input
                 name="relief"
-                // value={cal.relief}
-                // onChange={handleChange}
+                value={cal.relief}
+                onChange={handleChange}
                 bg={"#F4F4F4"}
                 w={"16rem"}
                 type="number"
@@ -745,8 +1191,8 @@ const Individual = () => {
 
               <Input
                 name="tds"
-                // value={cal.tds}
-                // onChange={handleChange}
+                value={cal.tds}
+                onChange={handleChange}
                 bg={"#FFFFFF"}
                 w={"16rem"}
                 type="number"
@@ -765,7 +1211,7 @@ const Individual = () => {
 
               <Input
                 name="assessedTax"
-                // value={formData.assessedTax}
+                value={formData.assessedTax}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
@@ -778,31 +1224,33 @@ const Individual = () => {
       </Box>
 
       <Box w={"20rem"} m={"auto"} mt={"0.7rem"} mb={"1rem"}>
-            <Button
-              color={"#FFFFFF"}
-              bg={"#FE6C5F"}
-              fontSize={"0.9rem"}
-              borderRadius={"0rem"}
-              _hover={{
-                color: "#FFFFFF",
-                bg: "#FE6C5F",
-              }}
-            >
-              Calculate
-            </Button>
-            <Button
-              color={"#FFFFFF"}
-              bg={"#A0A1A1"}
-              ml={"1rem"}
-              borderRadius={"0rem"}
-              _hover={{
-                color: "#FFFFFF",
-                bg: "#A0A1A1",
-              }}
-            >
-              Reset
-            </Button>
-          </Box>
+        <Button
+          color={"#FFFFFF"}
+          bg={"#FE6C5F"}
+          fontSize={"0.9rem"}
+          borderRadius={"0rem"}
+          _hover={{
+            color: "#FFFFFF",
+            bg: "#FE6C5F",
+          }}
+          onClick={handleClick}
+        >
+          Calculate
+        </Button>
+        <Button
+          color={"#FFFFFF"}
+          bg={"#A0A1A1"}
+          ml={"1rem"}
+          borderRadius={"0rem"}
+          _hover={{
+            color: "#FFFFFF",
+            bg: "#A0A1A1",
+          }}
+          onClick={handleReset}
+        >
+          Reset
+        </Button>
+      </Box>
     </>
   );
 };
