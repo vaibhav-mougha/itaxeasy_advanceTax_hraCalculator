@@ -6,6 +6,8 @@ export default function IncomeFromOtherSources({
   show,
   name = "",
   type = "text",
+  handleChange,
+  value
 }) {
   return (
     <>
@@ -20,9 +22,11 @@ export default function IncomeFromOtherSources({
               {show ? (
                 <Input
                   name={name}
+                  value={value}
                   bg={"#E0E0E0"}
                   w={"16rem"}
                   type={type}
+                  onChange={handleChange}
                 />
               ) : (
                 ""

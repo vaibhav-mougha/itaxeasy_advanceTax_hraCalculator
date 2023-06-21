@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Text,
@@ -42,13 +42,186 @@ const Individual = () => {
 
   const ifhpUrf = useRef(null);
   const [ifhp, setIfhp] = useState(false);
+  const [ifhpDate, setIfhpData] = useState({
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    InterestonHousingLoanfirst: "",
+    Incomefromselfoccupiedhouseproperty: "",
+    AnnualLetableValueRentReceivedorReceivable: "",
+    LessMunicipalTaxesPaidDuringtheYear: "",
+    LessUnrealizedRent: "",
+    NetAnnualValue: "",
+    StandardDeductionofNetAnnualValue: "",
+    InterestonHousingLoansec: "",
+    IncomefromLetoutHouseProperty: "",
+  });
+  const [IncomeFromHouseProperty, setIncomeFromHouseProperty] = useState("");
+  const handleChangeIfhp = (event) => {
+    const { name, value } = event.target;
+    setIfhpData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  useEffect(() => {
+    let total = 0;
+    for (let key in ifhpDate) {
+      total += Number(ifhpDate[key]);
+    }
+    setIncomeFromHouseProperty(total);
+  }, [ifhpDate]);
 
   const capitalGainsRef = useRef(null);
   const [capitalGains, setCapitalGains] = useState(false);
 
+  ////////////////////////////////
+  const [capitalGainsData, setCapitalGainsData] = useState({
+    mainTotal: "",
+    firstFirst: "",
+    firstSec: "",
+    firstThird: "",
+    firstFourth: "",
+    firstFive: "",
+    firstTotal: 0,
+    /////////////////////////
+    secFirst: "",
+    secSec: "",
+    secThird: "",
+    secFourth: "",
+    secFive: "",
+    secTotal: 0,
+    /////////////////////////////////
+    thirdFirst: "",
+    thirdSec: "",
+    thirdThird: "",
+    thirdFourth: "",
+    thirdFive: "",
+    thirdTotal: 0,
+    ///////////////////////////////////
+    fourthFirst: "",
+    fourthSec: "",
+    fourthThird: "",
+    fourthFourth: "",
+    fourthFive: "",
+    fourthTotal: 0,
+    //////////////////////////////////
+    fiveFirst: "",
+    fiveSec: "",
+    fiveThird: "",
+    fiveFourth: "",
+    fiveFive: "",
+    fiveTotal: 0,
+  });
+
+  const handleChangeCapitalGains = (event) => {
+    const { name, value } = event.target;
+    setCapitalGainsData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  useEffect(() => {
+    const firstTotalValue =
+      Number(capitalGainsData.firstFirst) +
+      Number(capitalGainsData.firstSec) +
+      Number(capitalGainsData.firstThird) +
+      Number(capitalGainsData.firstFourth) +
+      Number(capitalGainsData.firstFive);
+    const secTotalValue =
+      Number(capitalGainsData.secFirst) +
+      Number(capitalGainsData.secSec) +
+      Number(capitalGainsData.secThird) +
+      Number(capitalGainsData.secFourth) +
+      Number(capitalGainsData.secFive);
+
+    const thirdTotalValue =
+      Number(capitalGainsData.thirdFirst) +
+      Number(capitalGainsData.thirdSec) +
+      Number(capitalGainsData.thirdThird) +
+      Number(capitalGainsData.thirdFourth) +
+      Number(capitalGainsData.thirdFive);
+
+    const fourthTotalvalue =
+      Number(capitalGainsData.fourthFirst) +
+      Number(capitalGainsData.fourthSec) +
+      Number(capitalGainsData.fourthThird) +
+      Number(capitalGainsData.fourthFourth) +
+      Number(capitalGainsData.fourthFive);
+    const fiveTotalValue =
+      Number(capitalGainsData.fiveFirst) +
+      Number(capitalGainsData.fiveSec) +
+      Number(capitalGainsData.fiveThird) +
+      Number(capitalGainsData.fiveFourth) +
+      Number(capitalGainsData.fiveFive);
+    setCapitalGainsData((prev) => {
+      return {
+        ...prev,
+        firstTotal: Number(firstTotalValue),
+        secTotal: Number(secTotalValue),
+        thirdTotal: Number(thirdTotalValue),
+        fourthTotal: Number(fourthTotalvalue),
+        fiveTotal: Number(fiveTotalValue),
+      };
+    });
+  }, [capitalGainsData]);
+
+  useEffect(() => {
+    const total =
+      Number(capitalGainsData.firstTotal) +
+      Number(capitalGainsData.secTotal) +
+      Number(capitalGainsData.thirdTotal) +
+      Number(capitalGainsData.fourthTotal) +
+      Number(capitalGainsData.fiveTotal);
+    setCapitalGainsData((prev) => {
+      return {
+        ...prev,
+        mainTotal: total,
+      };
+    });
+  }, [capitalGainsData]);
+
+  ///////////////////////////////
+
   const incomeFromOtherSourcesRef = useRef(null);
-  const [incomeFromOtherSources, setIncomeFromOtherSourcesRef] =
-    useState(false);
+  const [incomeFromOtherSources, setIncomeFromOtherSources] = useState(false);
+
+  ////////////////////////////////////
+  const [incomeFromOtherSourcesData, setIncomeFromOtherSourcesData] = useState({
+    Interest: "",
+    CommissionOtherIncome: "",
+    WinningsfromLotteryCrosswordPuzzlesetc: "",
+    mainTotal: "",
+  });
+
+  const handleChangeIFOSD = (event) => {
+    const { name, value } = event.target;
+    setIncomeFromOtherSourcesData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  useEffect(() => {
+    const totalValue =
+      Number(incomeFromOtherSourcesData.Interest) +
+      Number(incomeFromOtherSourcesData.CommissionOtherIncome) +
+      Number(incomeFromOtherSourcesData.WinningsfromLotteryCrosswordPuzzlesetc);
+    setIncomeFromOtherSourcesData((prev) => {
+      return {
+        ...prev,
+        mainTotal: totalValue,
+      };
+    });
+  }, [incomeFromOtherSourcesData]);
+
+  ///////////////////////////////////
 
   const deductionsRef = useRef(null);
   const [deductions, setDeductions] = useState(false);
@@ -72,10 +245,10 @@ const Individual = () => {
       }
     } else if (name == "incomeFromOtherSources") {
       if (incomeFromOtherSources) {
-        setIncomeFromOtherSourcesRef(false);
+        setIncomeFromOtherSources(false);
         incomeFromOtherSourcesRef.current.style.display = "none";
       } else {
-        setIncomeFromOtherSourcesRef(true);
+        setIncomeFromOtherSources(true);
         incomeFromOtherSourcesRef.current.style.display = "block";
       }
     } else if (name == "deductions") {
@@ -110,10 +283,20 @@ const Individual = () => {
       };
     });
 
-    cal.netTaxableIncome = cal.incomeFromSalary + cal.profitsAndGains;
+    setCal((prev) => {
+      return {
+        ...prev,
+        netTaxableIncome: (
+          +cal.incomeFromSalary +
+          +cal.profitsAndGains +
+          +IncomeFromHouseProperty +
+          +capitalGainsData.mainTotal +
+          +incomeFromOtherSourcesData.mainTotal
+        ).toFixed(2),
+      };
+    });
 
     if (cal.netTaxableIncome <= 250000) {
-      cal.netTaxableIncome = 0;
       formData.incomeTax = 0;
       formData.surcharge = 0;
       formData.educationCess = 0;
@@ -616,6 +799,7 @@ const Individual = () => {
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
+                value={IncomeFromHouseProperty}
                 disabled
               />
             </Flex>
@@ -642,37 +826,77 @@ const Individual = () => {
             text={"Interest Paid/Payable on Housing Loan"}
             show={false}
           />
-          <IfhpContainer text={"1. Interest on Housing Loan"} show={true} />
           <IfhpContainer
+            text={"1. Interest on Housing Loan"}
+            name={"InterestonHousingLoanfirst"}
+            show={true}
+            value={ifhpDate.InterestonHousingLoanfirst}
+            handleChange={handleChangeIfhp}
+          />
+          <IfhpContainer
+            name={"Incomefromselfoccupiedhouseproperty"}
+            value={ifhpDate.Incomefromselfoccupiedhouseproperty}
             text={"Income from self-occupied house property"}
             show={true}
+            handleChange={handleChangeIfhp}
           />
           <IfhpContainer
             text={"b. Income from Let-out Property"}
             show={false}
           />
           <IfhpContainer
+            name={"AnnualLetableValueRentReceivedorReceivable"}
             text={"1. Annual Letable Value/Rent Received or Receivable"}
             show={true}
+            value={ifhpDate.AnnualLetableValueRentReceivedorReceivable}
+            handleChange={handleChangeIfhp}
           />
           <IfhpContainer
+            name={"LessMunicipalTaxesPaidDuringtheYear"}
+            value={ifhpDate.LessMunicipalTaxesPaidDuringtheYear}
             text={"2. Less: Municipal Taxes Paid During the Year"}
             show={true}
+            handleChange={handleChangeIfhp}
           />
-          <IfhpContainer text={"3. Less:Unrealized Rent"} show={true} />
-          <IfhpContainer text={"4. Net Annual Value (1-(2+3))"} show={true} />
           <IfhpContainer
+            value={ifhpDate.LessUnrealizedRent}
+            text={"3. Less:Unrealized Rent"}
+            name={"LessUnrealizedRent"}
+            show={true}
+            handleChange={handleChangeIfhp}
+          />
+          <IfhpContainer
+            value={ifhpDate.NetAnnualValue}
+            text={"4. Net Annual Value (1-(2+3))"}
+            name={"NetAnnualValue"}
+            show={true}
+            handleChange={handleChangeIfhp}
+          />
+          <IfhpContainer
+            //  name={"LessDeductionsfromNetAnnualValue"}
             text={"Less: Deductions from Net Annual Value"}
             show={false}
           />
           <IfhpContainer
+            value={ifhpDate.StandardDeductionofNetAnnualValue}
+            name={"StandardDeductionofNetAnnualValue"}
             text={"i. Standard Deduction @ 30% of Net Annual Value"}
             show={true}
+            handleChange={handleChangeIfhp}
           />
-          <IfhpContainer text={"ii. Interest on Housing Loan"} show={true} />
           <IfhpContainer
+            value={ifhpDate.InterestonHousingLoansec}
+            text={"ii. Interest on Housing Loan"}
+            name={"InterestonHousingLoansec"}
+            show={true}
+            handleChange={handleChangeIfhp}
+          />
+          <IfhpContainer
+            value={ifhpDate.IncomefromLetoutHouseProperty}
+            name={"IncomefromLetoutHouseProperty"}
             text={"Income from Let-out House Property"}
             show={true}
+            handleChange={handleChangeIfhp}
           />
         </Box>
         {/* /////////////// */}
@@ -708,6 +932,7 @@ const Individual = () => {
 
               <Input
                 name="capitalGains"
+                value={capitalGainsData.mainTotal}
                 bg={"#E0E0E0"}
                 w={"16rem"}
                 type="number"
@@ -734,36 +959,191 @@ const Individual = () => {
             gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr 1fr"}
             gap={"30px 10px"}
           >
-            <CapitalGainsBox text={"From 01/04/2023 to 15/06/2023"} />
-            <CapitalGainsBox text={"From 16/06/2023 to 15/09/2023"} />
-            <CapitalGainsBox text={"From 16/09/2023 to 15/12/2023"} />
-            <CapitalGainsBox text={"From 16/12/2023 to 15/03/2024"} />
-            <CapitalGainsBox text={"From 16/03/2024 to 31/03/2024"} />
-            <CapitalGainsBox text={"Total"} bold={true} />
-            <CapitalGainsBox text={"From 01/04/2023 to 15/06/2023"} />
-            <CapitalGainsBox text={"From 16/06/2023 to 15/09/2023"} />
-            <CapitalGainsBox text={"From 16/09/2023 to 15/12/2023"} />
-            <CapitalGainsBox text={"From 16/12/2023 to 15/03/2024"} />
-            <CapitalGainsBox text={"From 16/03/2024 to 31/03/2024"} />
-            <CapitalGainsBox text={"Total"} bold={true} />
-            <CapitalGainsBox text={"From 01/04/2023 to 15/06/2023"} />
-            <CapitalGainsBox text={"From 15/06/2023 to 15/09/2023"} />
-            <CapitalGainsBox text={"From 16/09/2023 to 15/12/2023"} />
-            <CapitalGainsBox text={"From 16/12/2023 to 15/03/2024"} />
-            <CapitalGainsBox text={"From 16/03/2024 to 31/03/2024"} />
-            <CapitalGainsBox text={"Total"} bold={true} />
-            <CapitalGainsBox text={"From 01/04/2023 to 15/06/2023"} />
-            <CapitalGainsBox text={"From 16/06/2023 to 15/09/2023"} />
-            <CapitalGainsBox text={"From 16/09/2023 to 15/12/2023"} />
-            <CapitalGainsBox text={"From 16/12/2023 to 15/03/2024"} />
-            <CapitalGainsBox text={"From 16/03/2024 to 31/03/2024"} />
-            <CapitalGainsBox text={"Total"} bold={true} />
-            <CapitalGainsBox text={"From 01/04/2023 to 15/06/2023"} />
-            <CapitalGainsBox text={"From 16/06/2023 to 15/09/2023"} />
-            <CapitalGainsBox text={"From 16/09/2023 to 15/12/2023"} />
-            <CapitalGainsBox text={"From 16/12/2023 to 15/03/2024"} />
-            <CapitalGainsBox text={"From 16/03/2024 to 31/03/2024"} />
-            <CapitalGainsBox text={"Total"} bold={true} />
+            <CapitalGainsBox
+              text={"From 01/04/2023 to 15/06/2023"}
+              name={"firstFirst"}
+              value={capitalGainsData.firstFirst}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"From 16/06/2023 to 15/09/2023"}
+              name={"firstSec"}
+              value={capitalGainsData.firstSec}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"From 16/09/2023 to 15/12/2023"}
+              name={"firstThird"}
+              value={capitalGainsData.firstThird}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"From 16/12/2023 to 15/03/2024"}
+              name={"firstFourth"}
+              value={capitalGainsData.firstFourth}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"From 16/03/2024 to 31/03/2024"}
+              name={"firstFive"}
+              value={capitalGainsData.firstFive}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"Total"}
+              bold={true}
+              name={"firstTotal"}
+              value={capitalGainsData.firstTotal}
+            />
+
+            <CapitalGainsBox
+              value={capitalGainsData.secFirst}
+              name={"secFirst"}
+              text={"From 01/04/2023 to 15/06/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.secSec}
+              name={"secSec"}
+              text={"From 16/06/2023 to 15/09/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.secThird}
+              name={"secThird"}
+              text={"From 16/09/2023 to 15/12/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.secFourth}
+              name={"secFourth"}
+              text={"From 16/12/2023 to 15/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.secFive}
+              name={"secFive"}
+              text={"From 16/03/2024 to 31/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"Total"}
+              bold={true}
+              name={"secTotal"}
+              value={capitalGainsData.secTotal}
+            />
+
+            {/* ////////////////////////////////////////////////////////////// */}
+            <CapitalGainsBox
+              value={capitalGainsData.thirdFirst}
+              name={"thirdFirst"}
+              text={"From 01/04/2023 to 15/06/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.thirdSec}
+              name={"thirdSec"}
+              text={"From 15/06/2023 to 15/09/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.thirdThird}
+              name={"thirdThird"}
+              text={"From 16/09/2023 to 15/12/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.thirdFourth}
+              name={"thirdFourth"}
+              text={"From 16/12/2023 to 15/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.thirdFive}
+              name={"thirdFive"}
+              text={"From 16/03/2024 to 31/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"Total"}
+              bold={true}
+              value={capitalGainsData.thirdTotal}
+            />
+
+            {/* //////////////////////////////////////////////// */}
+            <CapitalGainsBox
+              value={capitalGainsData.fourthFirst}
+              name={"fourthFirst"}
+              text={"From 01/04/2023 to 15/06/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fourthSec}
+              name={"fourthSec"}
+              text={"From 16/06/2023 to 15/09/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fourthThird}
+              name={"fourthThird"}
+              text={"From 16/09/2023 to 15/12/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fourthFourth}
+              name={"fourthFourth"}
+              text={"From 16/12/2023 to 15/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fourthFive}
+              name={"fourthFive"}
+              text={"From 16/03/2024 to 31/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"Total"}
+              bold={true}
+              value={capitalGainsData.fourthTotal}
+            />
+
+            {/* //////////////////////////////////////// */}
+            <CapitalGainsBox
+              value={capitalGainsData.fiveFirst}
+              name={"fiveFirst"}
+              text={"From 01/04/2023 to 15/06/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fiveSec}
+              name={"fiveSec"}
+              text={"From 16/06/2023 to 15/09/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fiveThird}
+              name={"fiveThird"}
+              text={"From 16/09/2023 to 15/12/2023"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fiveFourth}
+              name={"fiveFourth"}
+              text={"From 16/12/2023 to 15/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              value={capitalGainsData.fiveFive}
+              name={"fiveFive"}
+              text={"From 16/03/2024 to 31/03/2024"}
+              handleChange={handleChangeCapitalGains}
+            />
+            <CapitalGainsBox
+              text={"Total"}
+              bold={true}
+              name={"fiveTotal"}
+              value={capitalGainsData.fiveTotal}
+            />
           </Box>
         </Box>
 
@@ -802,6 +1182,7 @@ const Individual = () => {
                 name="incomeFromOtherSources"
                 bg={"#E0E0E0"}
                 w={"16rem"}
+                value={incomeFromOtherSourcesData.mainTotal}
                 type="number"
                 disabled
               />
@@ -822,14 +1203,28 @@ const Individual = () => {
           display={"none"}
           ref={incomeFromOtherSourcesRef}
         >
-          <IncomeFromOtherSources text={"Interest"} show={true} />
+          <IncomeFromOtherSources
+            text={"Interest"}
+            name={"Interest"}
+            value={incomeFromOtherSourcesData.Interest}
+            show={true}
+            handleChange={handleChangeIFOSD}
+          />
           <IncomeFromOtherSources
             text={"Commission/Other Income"}
             show={true}
+            name={"CommissionOtherIncome"}
+            value={incomeFromOtherSourcesData.CommissionOtherIncome}
+            handleChange={handleChangeIFOSD}
           />
           <IncomeFromOtherSources
             text={"Winnings from Lottery, Crossword Puzzles, etc."}
             show={true}
+            name={"WinningsfromLotteryCrosswordPuzzlesetc"}
+            value={
+              incomeFromOtherSourcesData.WinningsfromLotteryCrosswordPuzzlesetc
+            }
+            handleChange={handleChangeIFOSD}
           />
         </Box>
 
@@ -1250,6 +1645,7 @@ const Individual = () => {
         >
           Reset
         </Button>
+
       </Box>
     </>
   );
