@@ -3,7 +3,6 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
@@ -12,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const AdvanceTaxTable = () => {
+const AdvanceTaxTable = ({ TableData }) => {
   return (
     <>
       <Box>
@@ -40,34 +39,51 @@ const AdvanceTaxTable = () => {
             <Tbody>
               <Tr>
                 <Td>Advance tax payable upto June 15, 2023 (Cumulative)</Td>
-                <Td>00</Td>
+                <Td>{+(TableData * 0.15).toFixed(2)}</Td>
               </Tr>
               <Tr>
                 <Td>
                   Advance tax payable upto September 15, 2023 (Cumulative)
                 </Td>
-                <Td>00</Td>
+                <Td>
+                  {(+(TableData * 0.15).toFixed(2) +
+                    +(TableData * 0.3).toFixed(2)).toFixed(2)}
+                </Td>
               </Tr>
               <Tr>
                 <Td>Advance tax payable upto December 15, 2023 (Cumulative)</Td>
-                <Td>00</Td>
+                <Td>
+                  {(+(TableData * 0.15).toFixed(2) +
+                    +(TableData * 0.3).toFixed(2) +
+                    +(TableData * 0.3).toFixed(2)).toFixed(2)}
+                </Td>
               </Tr>
 
               <Tr>
                 <Td>Advance tax payable upto March 15, 2024 (Cumulative)</Td>
-                <Td>00</Td>
+                <Td>
+                  {(+(TableData * 0.15).toFixed(2) +
+                    +(TableData * 0.3).toFixed(2) +
+                    +(TableData * 0.3).toFixed(2) +
+                    +(TableData * 0.25).toFixed(2)).toFixed(2)}
+                </Td>
               </Tr>
 
               <Tr>
                 <Td>Advance tax payable upto March 31, 2024 (Cumulative)</Td>
-                <Td>00</Td>
+                <Td>
+                {(+(TableData * 0.15).toFixed(2) +
+                    +(TableData * 0.3).toFixed(2) +
+                    +(TableData * 0.3).toFixed(2) +
+                    +(TableData * 0.25).toFixed(2)).toFixed(2)}
+                </Td>
               </Tr>
             </Tbody>
           </Table>
         </TableContainer>
       </Box>
 
-      <Box>
+      <Box mb={"2rem"}>
         <Text
           mt={"1rem"}
           textAlign={"center"}
@@ -95,21 +111,21 @@ const AdvanceTaxTable = () => {
                   First installment payable for the period April 1, 2023 to June
                   15, 2023
                 </Td>
-                <Td>00</Td>
+                <Td>{(TableData * 0.15).toFixed(2)}</Td>
               </Tr>
               <Tr>
                 <Td>
                   Second installment payable for the period June 16, 2023 to
                   September 15, 2023
                 </Td>
-                <Td>00</Td>
+                <Td>{(TableData * 0.3).toFixed(2)}</Td>
               </Tr>
               <Tr>
                 <Td>
                   Third installment payable for the period September 16, 2023 to
                   December 15, 2023
                 </Td>
-                <Td>00</Td>
+                <Td>{(TableData * 0.3).toFixed(2)}</Td>
               </Tr>
 
               <Tr>
@@ -117,7 +133,7 @@ const AdvanceTaxTable = () => {
                   Fourth installment payable for the period December 16, 2023 to
                   March 15, 2024
                 </Td>
-                <Td>00</Td>
+                <Td>{(TableData * 0.25).toFixed(2)}</Td>
               </Tr>
 
               <Tr>
@@ -125,7 +141,7 @@ const AdvanceTaxTable = () => {
                   Last installment payable for the period March 16, 2024 to
                   March 31, 2024
                 </Td>
-                <Td>00</Td>
+                <Td>0.00</Td>
               </Tr>
             </Tbody>
           </Table>

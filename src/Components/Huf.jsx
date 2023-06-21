@@ -10,6 +10,7 @@ import {
   useToast,
   Button,
 } from "@chakra-ui/react";
+import AdvanceTaxTable from "./AdvanceTaxTable";
 
 const Huf = () => {
   const [cal, setCal] = useState({
@@ -633,6 +634,12 @@ const Huf = () => {
           Reset
         </Button>
       </Box>
+
+      {+formData.assessedTax > 0 ? (
+        <AdvanceTaxTable TableData={formData.assessedTax} />
+      ) : (
+        ""
+      )}
     </>
   );
 };

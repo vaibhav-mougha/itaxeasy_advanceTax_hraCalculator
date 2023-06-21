@@ -18,6 +18,7 @@ import DeductionsBox from "./Deductions/DeductionsBox";
 import TotalBox from "./Deductions/TotalBox";
 import CheckDeduction from "./Deductions/CheckDeduction";
 import ILTBox from "./ILTBox/ILTBox";
+import AdvanceTaxTable from "./AdvanceTaxTable";
 
 const Individual = () => {
   const [cal, setCal] = useState({
@@ -54,6 +55,7 @@ const Individual = () => {
     InterestonHousingLoansec: "",
     IncomefromLetoutHouseProperty: "",
   });
+
   const [IncomeFromHouseProperty, setIncomeFromHouseProperty] = useState("");
   const handleChangeIfhp = (event) => {
     const { name, value } = event.target;
@@ -274,14 +276,9 @@ const Individual = () => {
 
   // console.log(cal)
 
+  
+
   const handleClick = (event) => {
-    const { name, value } = event.target;
-    setCal((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
 
     setCal((prev) => {
       return {
@@ -1645,8 +1642,13 @@ const Individual = () => {
         >
           Reset
         </Button>
-
       </Box>
+
+      {+formData.assessedTax > 0 ? (
+        <AdvanceTaxTable TableData={formData.assessedTax} />
+      ) : (
+        ""
+      )}
     </>
   );
 };
