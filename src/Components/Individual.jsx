@@ -317,6 +317,8 @@ const Individual = () => {
       //   duration: 3000,
       //   isClosable: true,
       // });
+
+      
     } else if (
       250001 <= cal.netTaxableIncome &&
       cal.netTaxableIncome <= 500000
