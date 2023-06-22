@@ -294,29 +294,29 @@ const Individual = () => {
     });
 
     if (cal.netTaxableIncome <= 250000) {
-      formData.incomeTax = 0;
-      formData.surcharge = 0;
-      formData.educationCess = 0;
-      formData.secondaryHigherEducationCess = 0;
-      formData.totalTaxLiability = 0;
-      formData.assessedTax = 0;
+      // formData.incomeTax = 0;
+      // formData.surcharge = 0;
+      // formData.educationCess = 0;
+      // formData.secondaryHigherEducationCess = 0;
+      // formData.totalTaxLiability = 0;
+      // formData.assessedTax = 0;
 
-      setCal((prev) => {
-        return {
-          ...prev,
-          relief: 0,
-          tds: 0,
-        };
-      });
-      toast({
-        position: "top",
-        title: "Income Tax Department",
-        description:
-          "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      // setCal((prev) => {
+      //   return {
+      //     ...prev,
+      //     relief: 0,
+      //     tds: 0,
+      //   };
+      // });
+      // toast({
+      //   position: "top",
+      //   title: "Income Tax Department",
+      //   description:
+      //     "Error:Advance Tax will not be payable if assessed tax is less than ₹10,000",
+      //   status: "error",
+      //   duration: 3000,
+      //   isClosable: true,
+      // });
     } else if (
       250001 <= cal.netTaxableIncome &&
       cal.netTaxableIncome <= 500000
