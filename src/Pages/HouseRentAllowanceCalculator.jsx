@@ -45,14 +45,7 @@ const HouseRentAllowanceCalculator = () => {
   //   console.log(formData)
 
   const handleClick = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-
+  
     let HRA = formData.hra;
     let basicSal = 0.5 * formData.basicSalary;
     let actualRentPaid = formData.rentPaid - 0.1 * formData.basicSalary;
